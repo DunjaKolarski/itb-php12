@@ -1,0 +1,25 @@
+h2{
+    color: blueviolet;
+    text-align: center;
+}
+body{
+    background-color: antiquewhite;
+}
+img{
+    border: 20px double crimson ;
+}
+.klasa1{
+    color: blue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: medium;
+}
+#prvi{
+    color: aqua;
+
+}
+#link{
+    color: red;
+}
+a:hover{
+    color: green;
+}
