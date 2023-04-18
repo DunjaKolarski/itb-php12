@@ -1,0 +1,18 @@
+/* 
+       1. HTML -> parent-children struktura
+       2. Children -> float
+       3. parent -> overflow: hidden
+*/
+div {
+    background-color: brown;
+    overflow: hidden;
+}
+p {
+    background-color: aquamarine;
+    float: right;
+    width: 220px;
+    height: 30px
+}
+p:nth-child(2n) {
+    float: left;
+}

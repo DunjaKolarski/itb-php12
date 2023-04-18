@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="test.php" method="post">
+        <div>
+            <fieldset>
+                <legend>Login details</legend>
+                <div>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="name" placeholder="Your name" >
+                    <br>
+                    <label for="e">Email: </label>
+                    <input type="text" name="e" id="e" placeholder="Your email" disabled>
+                    <br>
+                    <label for="pass">Password: </label>
+                    <input type="text" name="pass" id="pass" placeholder="Your password" maxlength="10">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Your feedback</legend>
+                <div>
+                    <label for="emo">Emotions: </label>
+                    <br>
+                    <div>Happy<input type="checkbox" value="emo" id="happy"></div>
+                    <br>
+                    <div>Sad<input type="checkbox" value="sad" name="emo" checked></div>
+                    <br>
+                    <div>Angry<input type="checkbox" value="angry" name="emo"></div>
+                </div>
+                <div>
+                    <label for="rate">Your rate of our site: </label>
+                    <br>
+                    <div>
+                        A
+                        <input type="radio" value="A" name="rate" checked>
+                    </div>
+                    <br>
+                    <div>B<input type="radio" value="B" name="rate"></div>
+                    <br>
+                    <div>C<input type="radio" value="C" name="rate"></div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div>
+                    <label for="date">Unos datuma: </label>
+                    <input type="date" name="date" id="date" min="2020.02.03" max="2022.02.03" step="3">
+                </div>
+                <div>
+                    <label for="file">Add document: </label>
+                    <input type="file" name="file" id="file">
+                </div>
+            </fieldset>
+        </div>
+      
+      <fieldset>
+        <div>
+            <label for="lan">Your favorite language for programming: </label>
+            <select name="lan" id="lan">
+            <optgroup label="Languages">
+                <option value="">Select language</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JS</option>
+            </optgroup>
+        </select>
+        </div>
+        <div>
+            <input type="button" value="Submit">
+            <br>
+            <input type="button" value="reset">
+        </div>
+      </fieldset>
+    </form>
+</body>
+</html>

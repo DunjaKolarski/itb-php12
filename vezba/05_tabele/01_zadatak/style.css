@@ -1,0 +1,35 @@
+table, th, td {
+    border: 1px solid black;
+}
+table tr th:nth-child(3) {
+    width: 30%;
+}
+table tr td:nth-child(3) {
+    width: 30%;
+}
+table tr th:nth-child(5) {
+    width: 40%;
+}
+table tr td:nth-child(5) {
+    width: 40%;
+}
+
+.prva tr:nth-child(3) {
+    background-color: yellow;
+}
+.druga tr th:nth-child(3) {
+    background-color: yellow;
+}
+.druga tr td:nth-child(3) {
+    background-color: yellow;
+}
+.prva tr:nth-child(2n-1) {
+    font-style:italic;
+}
+
+.druga tr:nth-child(2n):hover {  
+    background-color: yellow;
+}
+.druga tr:nth-child(3n) {
+    color: blue;
+}

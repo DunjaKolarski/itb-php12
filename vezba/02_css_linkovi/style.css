@@ -1,0 +1,13 @@
+/*bitan je redosled tacno ovakav!!!!!!!*/
+a:link {
+    color: beige;
+}
+a:visited {
+    color: red;
+}
+a:hover {
+    color: aqua;
+}
+a:active {
+    background-color: yellow;
+}

@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+div {
+    width: 200px;
+    border: 2px dotted black;
+    height: 500px;
+}
+div span {
+    color:  red;
+}
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 5px dotted red;
+
+}
+h4 {
+    color: blue;
+}
+section {
+    overflow: auto;
+    height: 150px;
+    
+}
