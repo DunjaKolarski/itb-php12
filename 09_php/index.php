@@ -30,24 +30,4 @@
     $rezNovi = $sati * 60 + $minuti;
     echo "Rezultat zadatka je " . $rezNovi;
     echo "<br>";
-
-    /* 3. zadatak */
-    $cena = 500;
-    $nov = 1000;
-    $kusur = $nov - $cena;
-    echo "Rezultat zadatka je " . $kusur;
-    echo "<br>";
-
-    /* 4. zadatak */
-    $eur = 100;
-    $din = $eur * 120;
-    echo "Rezultat zadatka je " . $din;
-    echo "<br>";
-
-    /* 5. zadatak */
-    $din = 10000;
-    $eur = $din / 120;
-    echo "Rezultat zadatka je " . $eur;
-    echo "<br>";
-
 ?>
