@@ -198,8 +198,8 @@
         $prePodneLetovi = 0;
         foreach ($letovi as $let)
         {
-            $vreme = $let["time"];
-            if ($vreme < "12:00")
+            $vreme = (int)substr($let["time"], 0, 2); // u fromatu sati:minuti pa uzimamo podstring koji je na 0 poziciji duzine 2 tj  npr 20:00 uzimamo 20 i pomocu int pretvaramo string u intidzer
+            if ($vreme < 12)
             {
                 $prePodneLetovi++;
             }
@@ -286,6 +286,18 @@
         }
         
     }
+    // function trazeneDestinacije($letovi){
+    //     foreach($letovi as $let){
+    //         $destinacija[] = $let["dest"];
+    //     }
+    //     $nizGradova = array_count_values($destinacija);
+    //     foreach ($nizGradova as $grad => $brojPolaska) {
+    //         if ($brojPolaska > 1) {
+    //             echo "<p>Trazena destinacija je " .$grad."</p>";
+    //         }
+    //     }
+    // };
+    // echo trazeneDestinacije($letovi);
     // function trazeneDestinacije ($letovi)
     // {
     //     $polasci = [];
@@ -312,7 +324,24 @@
 
     // 14. Napisati funkciju prosecanBrojLetovaZaZemlju($letovi) kojoj se prosleđuje niz letova, a koja vraća prosečan broj letova ka nekoj zemlji.
     
-    
+    function prosecanBrojLetovaZaZemlju($letovi)
+    {
+        $zbirLetova = 0;
+        foreach($letovi as $let)
+        {
+                
+            $destinacija[] = $let["dest"];
+        }
+        $nizGradova = array_count_values($destinacija);
+        foreach ($nizGradova as $grad => $brojPolaska) 
+        {
+            if ($brojPolaska > 1) 
+            {
+                $zbirLetova += $brojPolaska;
+            }
+        }
+
+    }
 
     // ZADATAK. Formirati asocijativni niz koji od ključeva i vrednosti sadrži:
     // Datum (string u formatu YYYY/MM/DD),
@@ -327,8 +356,8 @@
         "datum" => "2023/05/16",
         "kisa" => true,
         "sunce" => true,
-        "oblacno" => false,
-        "temperature" => [5, 8, 13, 17, 12, 9, 6]
+        "oblacno" => true,
+        "temperature" => [5, 8, 13, 39, 30, 9, 6]
     ];
 
     function prosecnaTemp($dan)
@@ -457,8 +486,65 @@
     echo "<hr>";
    
     // 21. Za dan se smatra da je tropski ukoliko nijedna temperatura izmerena tog dana nije iznosila ispod 24 stepena. Napisati funkciju tropski($dan) kojoj se prosleđuje dan, a koja vraća true ukoliko je dan bio tropski, u suprotnom vraća false.
+
+    function tropski($dan)
+    {
+        $temperature = $dan["temperature"];
+        foreach ($temperature as $temp)
+        {
+            if ($temp < 24)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        
+    }
+    echo "<p> Da li je dan bio tropski : " . (tropski($dan) ? "JESTE" : "NIJE") .  "</p>";
+    echo "<hr>";
+   
     // 22. Dan je nepovoljan ako je razlika između neka dva uzastopna merenja veća od 8 stepeni. Napisati funkciju nepovoljan($dan) kojoj se prosleđuje dan, a koja vraća true ukoliko je dan bio nepovoljan, u suprotnom vraća false.
+
+    function nepovoljan ($dan)
+    {
+        $temperature = $dan["temperature"]; //////// prvo ih stvljam u varijablu da lakse dodjem do njih !!
+        for ($i = 0; $i < count($temperature) - 1; $i++) //// obratiti paznju na count -1 zbog toga sto ne uporedj zadnji sa nisacim
+        {
+            if ($temperature[$i] - $temperature[$i+1] || $temperature[$i+1] + 8 < $temperature[$i])
+            {
+                if (abs($temperature[$i] - $temperature[$i + 1]) > 8) 
+                {
+                    return true;
+                }
+            }
+            
+        }
+        return false;
+
+    }
+    echo "<p> Da li je dan bio nepovoljan : " . (nepovoljan($dan) ? "JESTE" : "NIJE") .  "</p>";
+    echo "<hr>";
+   
     // 23. Za dan se kaže da je neuobičajen ako je bilo kiše i ispod -5 stepeni, ili bilo oblačno i iznad 25 stepeni, ili je bilo i kišovito i oblačno i sunčano. Napisati funkciju neuobicajen($dan) kojoj se prosleđuje dan, a koja vraća true ukoliko je dan bio neuobičajen, u suprotnom vraća false.
+    function neuobicajan ($dan)
+    {
+        $temperature = $dan["temperature"];
+        foreach ($temperature as $temp)
+        {
+            if (($temp < -5 && $dan["kisa"] === true) || ($dan["kisa"] === true && $dan["oblacno"] === true && $dan["sunce"] === true))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    echo "<p> Da li je dan bio neuobicajan : " . (neuobicajan($dan) ? "JESTE" : "NIJE") .  "</p>";
+    echo "<hr>";
+
+
 
 
 
@@ -466,9 +552,9 @@
     // 24. Kreirati niz $blogovi, pri čemu je svaki element tog niza jedan asocijativni niz. Svaki od tih asocijativnih niza mora od ključeva da ima “title” (naslov), “likes” (broj lajkova), kao i “dislikes” (broj dislajkova).
 
     $blogovi = [
-        ["title"=> "Putovnje", "likes" => 3000, "dislikes" => 1600],
+        ["title"=> "Putovnje!", "likes" => 3000, "dislikes" => 1600],
         ["title"=> "Ljubav", "likes" => 1000, "dislikes" => 5000],
-        ["title"=> "Psi", "likes" => 5000, "dislikes" => 10]
+        ["title"=> "Psi!", "likes" => 5000, "dislikes" => 10]
     ];
 
 
@@ -524,11 +610,92 @@
     blogoviSaNajmanjDuploViseLajkovaNegoDis($blogovi);
     echo "<hr>";
     // 29. Napisati funkciju kojoj se prosleđuje $blogovi, a ona ispisuje sve one naslove blogova koji se završavaju uzvičnikom.
+    function nasloviKojiSeZavrUzv ($blogovi)
+    {
+        foreach ($blogovi as $blog)
+        {
+            if (substr($blog["title"],-1) === "!")
+            {
+                echo $blog["title"] . "<br>";
+            }
+        }
+    }
+    echo "<p>Blogovi ciji se naslovi zavrsavaju uzvicnikom su :</p>";
+    echo nasloviKojiSeZavrUzv($blogovi);
+    echo "<hr>";
     // 30. Napisati funkciju kojoj se prosleđuje $blogovi kao i $granica, a ona vraća broj blogova čiji je broj lajkova veći od granice.
+    function brojLajkovaVeciOdGranice ($blogovi, $granica)
+    {
+        $brojBlogova = 0;
+        foreach($blogovi as $blog)
+        {
+            if ($blog["likes"] > $granica)
+            {
+                $brojBlogova++;
+            }
+        }
+        return $brojBlogova;
+    }
+
+    echo "<p>Broj blogova ciji je broj lajkova veci od granice je : </p>";
+    echo brojLajkovaVeciOdGranice($blogovi, 2000);
+    echo "<hr>";
     // 31. Napisati funkciju kojoj se prosleđuje $blogovi kao i $rec, a ona vraća prosečan broj lajkova za one blogove koji u naslovu sadrže prosleđenu reč.
+    function brojLajkovaBlogovaKojiSadrRec ($blogovi, $rec)
+    {
+        foreach ($blogovi as $blog)
+        {
+            if (strpos($blog["title"], $rec) !== false)
+            {
+                echo "<p>Prosecan broj lajkova za blog " . $blog["title"] . " je " . (prosecanBrLajkova($blogovi)) ."</p>";
+            }
+        }
+    }
+    echo "<p>Prosecan broj lajkova blogova koje sadrze rec Psi je : </p>";
+    echo brojLajkovaBlogovaKojiSadrRec($blogovi, "Psi");
+    echo "<hr>";
     // 32. Napisati funkciju kojoj se prosleđuje $blogovi, a ona ispisuje blogove koji imaju iznadprosečan broj lakova.
+    function iznadProsecanBrojLajkova ($blogovi)
+    {
+        $prosecanBrLajkova = prosecanBrLajkova($blogovi);
+        foreach ($blogovi as $blog)
+        {
+            if ($blog["likes"] > $prosecanBrLajkova)
+            {
+                echo $blog["title"] . "<br>";
+            }
+        }
+    }
+    echo "<p>Blogovi sa iznadprosecnim  brojem lajkova su : </p>";
+    echo iznadProsecanBrojLajkova($blogovi);
+    echo "<hr>";
     // 33. Napisati funkciju kojoj se prosleđuje $blogovi, a ona ispisuje blogove koji imaju ispodprosečan broj dislakova.
+    function ispodProsecanBrLajkova ($blogovi)
+    {
+        $prosecanBrLajkova = prosecanBrLajkova($blogovi);
+        foreach ($blogovi as $blog)
+        {
+            if ($blog["likes"] < $prosecanBrLajkova)
+            {
+                echo $blog["title"] . "<br>";
+            }
+        }
+    }
+    echo "<p>Blogovi sa ispodprosecnim  brojem lajkova su : </p>";
+    echo ispodProsecanBrLajkova($blogovi);
+    echo "<hr>";
 
+    // primer sa ostatkom deljenja sa 0 da bi dobili zadnje cifrre domaci 7 
+    // primer strsub  16 vezba 29. zad - za vracanje dela stringa,proveru dal je nesto na zadnjem prvom mestu idt
+    // primer strpos nizovi
+    // primer strpos 16 vezba 31. zad - za gledanje da li string sadrzi string odredjeni vraca prvu poziciju pojavljivanja u nizu ako sadrzi ili false ako ne sadrzi specificno je  !== , ===
+    // strpos - 
+    // To check if a PHP string contains a substring, you can use the strpos($string, $substring) function. If the string contains the substring, strpos() will return the index of the first occurrence of the substring in the string and "false" otherwise.Fe
+    // za najvecu vred nizovi   
 
+    // kad imam zadatak sa nizom kao u temp "temperature" prilikom proveravanja tih temperatura prvo to temperature stavim u varijablu da bih lakse prosla kroz niz
+    // prilikom uporedjivanja merenja tih temp obratiti paznjuna 22 zad count - 1!!! jer se zadnji ne uporedjuje sa sledecim jer sledeceg nema!!
+    //  array_count_values prebrojava koliko se puta u varijabli pojavljuje sta i kljuc je to sto s ebroj vrednost koliko puta - pravi u niz npr 13 i 14 zad
+    // min max prosek 2. 3. 4. zad
 ?>
 
