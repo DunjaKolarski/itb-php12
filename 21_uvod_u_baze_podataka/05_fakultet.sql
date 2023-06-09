@@ -50,18 +50,3 @@ VALUES
 (2, "2022-03-05", 10, "014/2016UV", 2, 2);
 (3, "2022-03-05", 10, "020/2020II", 3, 2);
 
-SELECT * FROM `ispiti`
-LEFT JOIN `studenti` ON `ispiti` . `student_indeks`= `studenti` . `indeks`
-LEFT JOIN `predmeti` ON `ispiti` . `predmet_id` = `predmeti` . `id`
-LEFT JOIN `nastavnici` ON `ispiti` . `nastavnik_id` = `nastavnici` . `id`;
-
-SELECT 
-CONCAT(`studenti`. `ime`, " " , `studenti` . `prezime` )  AS `student`,
-`predmeti` . `naziv` ,
-CONCAT(`nastavnici` . `ime` , " ", `nastavnici` . `prezime`) AS `nastavnik`,
-`ispiti` . `datum`,
-`ispiti` . `ocena`
-FROM `ispiti`
-LEFT JOIN `studenti` ON `ispiti` . `student_indeks`= `studenti` . `indeks`
-LEFT JOIN `predmeti` ON `ispiti` . `predmet_id` = `predmeti` . `id`
-LEFT JOIN `nastavnici` ON `ispiti` . `nastavnik_id` = `nastavnici` . `id`;
