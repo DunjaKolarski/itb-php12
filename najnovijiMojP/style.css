@@ -1,0 +1,21 @@
+.error {
+    color: red;
+}
+.success
+{
+    color: green;
+}
+
+table {
+    border: 1px solid black;
+    margin: 10px;
+}
+.centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    text-align: center;
+}
+
